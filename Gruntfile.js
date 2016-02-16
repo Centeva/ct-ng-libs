@@ -3,7 +3,7 @@
 
 module.exports = function (grunt) {
 
-	var bower_components = grunt.file.readJSON("bower_components.json");
+	var bowerComponents = grunt.file.readJSON("bower_components.json");
 
 	require('load-grunt-tasks')(grunt);
 
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
 				options: {
 					sourceMap: false
 				},
-				src: [bower_components.vendor, bower_components.dev],
+				src: [bowerComponents.vendor, bowerComponents.dev],
 				dest: 'temp/bower_scripts.js'
 			}
 		},
@@ -139,17 +139,6 @@ module.exports = function (grunt) {
 			dist: ['dist', 'temp/dist'],
 			temp: ['temp']
 		},
-		dom_munger: {
-			dist: {
-				options: {
-					remove: 'script[replace=true]',
-					append: {selector: 'body', html: '<script src="app.js"></script>'},
-					update: {selector: 'link[href="temp/app.css"]', attribute: 'href', value: 'app.css'}
-				},
-				src: 'index.html',
-				dest: 'temp/dist/index.html'
-			}
-		},
 		concurrent: {
 			build: ['concat:vendorScripts', 'concat:vendorDevScripts', 'less:app', 'jasmine:tests:build']
 		}
@@ -163,7 +152,7 @@ module.exports = function (grunt) {
 			cb();
 		});
 	});
-	grunt.registerTask('lint', 'Runs code quality inspections', ['jshint:app']);
+	grunt.registerTask('lint', 'Runs code quality inspections', ['jshint:src']);
 	grunt.registerTask('lintTeamcity', 'Runs code quality inspections and generates reports for teamcity', ['jshint:teamcity']);
 	grunt.registerTask('tests', 'Runs jasmine tests', ['concat:distBowerScripts', 'jasmine:tests']);
 	grunt.registerTask('debugTests', 'Debugs jasmine tests.', ['build', 'connect:tests', 'watch:tests']);
