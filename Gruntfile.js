@@ -71,7 +71,7 @@ module.exports = function (grunt) {
 					sourceMap: false
 				},
 				src: [bower_components.vendor, bower_components.dev],
-				dest: 'temp/dist/bower_scripts.js'
+				dest: 'temp/bower_scripts.js'
 			}
 		},
 		jshint: {
@@ -95,11 +95,11 @@ module.exports = function (grunt) {
 		},
 		jasmine: {
 			tests: {
-				src: ['temp/app_scripts.min.js'],
+				src: ['src/**/*.js', '!src/**/*-spec.js'],
 				options: {
 					junit: {path: "temp/reports/jasmine_junit"},
 					specs: 'src/**/*-spec.js',
-					vendor: ["temp/bower_scripts.js", "temp/vendor_dev_scripts.js"],
+					vendor: ["temp/bower_scripts.js"],
 					outfile: 'temp/specrunner.html',
 					keepRunner: true
 				}
@@ -165,7 +165,7 @@ module.exports = function (grunt) {
 	});
 	grunt.registerTask('lint', 'Runs code quality inspections', ['jshint:app']);
 	grunt.registerTask('lintTeamcity', 'Runs code quality inspections and generates reports for teamcity', ['jshint:teamcity']);
-	grunt.registerTask('tests', 'Runs jasmine tests', ['build', 'jasmine:tests']);
+	grunt.registerTask('tests', 'Runs jasmine tests', ['concat:distBowerScripts', 'jasmine:tests']);
 	grunt.registerTask('debugTests', 'Debugs jasmine tests.', ['build', 'connect:tests', 'watch:tests']);
 	grunt.registerTask('dist', [
 		'clean:dist',

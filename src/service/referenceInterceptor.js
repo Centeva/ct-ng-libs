@@ -1,7 +1,12 @@
-angular.module('centeva.libs.referenceInterceptor', []).factory('referenceInterceptor', function () {
+angular.module('centeva-ng-libs.referenceInterceptor', []).factory('referenceInterceptor', function () {
 	function parse(obj) {
 		var data = [];
-		//depth first replacement of ref data.
+        /**
+         * Depth first search of the object tree structure looking for $ref references and replacing
+         * them with their corresponding objects.
+         *
+         * Parent is null/undefined the first time this is called. 
+         */
 		function _replace(obj, parent) {
 			var isObj = angular.isObject(obj);
 			if (angular.isArray(obj)) {
@@ -37,6 +42,9 @@ angular.module('centeva.libs.referenceInterceptor', []).factory('referenceInterc
 		return obj;
 	}
 
+    /**
+     * Recursive function to search up the parent tree to avoid circular references.
+     */
 	function parentContains(child, $ref) {
 		if (!angular.isObject(child)) {
 			return false;
@@ -52,6 +60,6 @@ angular.module('centeva.libs.referenceInterceptor', []).factory('referenceInterc
 		  return parse(response);
 		},
 	};
+}).config(function($httpProvider){
+	$httpProvider.interceptors.push('referenceInterceptor');	
 });
-
-$httpProvider.interceptors.push('referenceInterceptor');
