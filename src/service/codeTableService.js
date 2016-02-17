@@ -1,4 +1,4 @@
-angular.module('centeva-ng-libs.codeTableService', []).provider('codeTableService', function codeTableServiceProvider() {
+angular.module('centeva-ng-libs.codeTableService', ['centeva-ng-libs.dictionary']).provider('codeTableService', function codeTableServiceProvider() {
     var url = null;
 
     this.setUrl = function (newUrl) {
@@ -9,7 +9,7 @@ angular.module('centeva-ng-libs.codeTableService', []).provider('codeTableServic
         var CodeTables = function () {
             var codeTables = this;
             var privateDictionaries = {};
-            _.each(codeTables, function (values, code) {
+            angular.forEach(codeTables, function (values, code) {
                 if (code === "$id") {
                     return;
                 }
