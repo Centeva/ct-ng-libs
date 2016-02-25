@@ -74,5 +74,6 @@ describe('referenceInspector', function () {
 		expect(siblingCircular.anotherChild.children.length).toBe(2);
 		expect(siblingCircular.anotherChild.children[0].$id).toBe(2);
 		expect(siblingCircular.anotherChild.children[1].$id).toBe(1);
+		expect(siblingCircular.anotherChild.children[1].lastChild.$id).toBe(2);// Ensure that the copy gets all elements copied
 	});
 });
