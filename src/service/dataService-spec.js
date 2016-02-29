@@ -73,11 +73,4 @@ describe('dataService', function () {
         expect($httpMock.delete).toHaveBeenCalledWith(url+'1', undefined);
     }));
     
-    it('Should catch error and call ns', inject(function(dataService){
-        var deferred = $q.defer();
-        dataService.all([deferred.promise]);
-        deferred.reject({data:'Error Message'});
-        $rootScope.$apply();
-        expect(nsMock.showError).toHaveBeenCalledWith('Error Message');
-    }));
 });

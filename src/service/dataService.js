@@ -1,4 +1,4 @@
-angular.module('centeva-ng-libs.dataService', []).factory('dataService', function($http, $q, ns) {
+angular.module('centeva-ng-libs.dataService', []).factory('dataService', function($http, $q) {
     
     var ds = {};
     
@@ -38,12 +38,5 @@ angular.module('centeva-ng-libs.dataService', []).factory('dataService', functio
 		};
 	}
     
-    //Should this be a function of the notification service?
-    ds.all = function(promises) {
-		return $q.all(promises).catch(function(error) {
-			ns.showError(error.data);
-		});
-	}
-
     return ds;
 });
