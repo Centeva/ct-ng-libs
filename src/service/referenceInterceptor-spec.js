@@ -20,10 +20,9 @@ describe('referenceInspector', function () {
 				{ $id: 3, value: 'Object 3' }
 			],
 			anotherChild: {
-				$id: 4,
 				children: [
-					{ $ref: 2},
-					{ $ref: 3}
+				{ $ref: 2},
+				{ $ref: 3}
 				]
 			}
 		};
@@ -34,7 +33,6 @@ describe('referenceInspector', function () {
 			$id: 1,
 			value: 'Object 1',
 			anotherChild: {
-				$id: 2,
 				child: {
 					$ref: 1
 				}
@@ -52,25 +50,15 @@ describe('referenceInspector', function () {
 				{ $id: 3, value: 'Object 3' }
 			],
 			anotherChild: {
-				$id: 4,
 				children: [
-					{ $ref: 2 },
-					{ $ref: 1 }
+				{ $ref: 2 },
+				{ $ref: 1 }
 				]
-			},
-			lastChild: { $ref: 2 }
+			}
 		};
 
 		referenceInterceptor.response(siblingCircular);
-
-		expect(siblingCircular.children.length).toBe(2);
-		expect(siblingCircular.children[0].$id).toBe(2);
-		expect(siblingCircular.children[1].$id).toBe(3);
-
-		expect(siblingCircular.lastChild.$id).toBe(2);
-
-		expect(siblingCircular.anotherChild.children.length).toBe(2);
 		expect(siblingCircular.anotherChild.children[0].$id).toBe(2);
-		expect(siblingCircular.anotherChild.children[1].$id).toBe(1);
+		expect(siblingCircular.anotherChild.children[1].$ref).toBe(1);
 	});
 });
