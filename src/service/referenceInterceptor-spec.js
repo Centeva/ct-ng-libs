@@ -42,8 +42,7 @@ describe('referenceInspector', function () {
 		};
 
 		referenceInterceptor.response(simpleCircular);
-		expect(simpleCircular.anotherChild.child.$id).toBe(1);
-		expect(simpleCircular.anotherChild.child.anotherChild.child.$ref).toBe(1);
+		expect(simpleCircular.anotherChild.child.$ref).toBe(1);
 
 		var siblingCircular = {
 			$id: 1,
@@ -63,7 +62,6 @@ describe('referenceInspector', function () {
 		};
 
 		referenceInterceptor.response(siblingCircular);
-		console.log(siblingCircular);
 
 		expect(siblingCircular.children.length).toBe(2);
 		expect(siblingCircular.children[0].$id).toBe(2);
