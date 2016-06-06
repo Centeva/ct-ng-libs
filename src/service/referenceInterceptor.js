@@ -57,7 +57,8 @@ angular.module('centeva-ng-libs.referenceInterceptor', []).factory('referenceInt
 	
 	return {
 		'response': function(response) {
-		  return parse(response);
+		  parse(response.data);
+		  return response;
 		},
 	};
 }).config(function($httpProvider){
