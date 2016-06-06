@@ -26,7 +26,7 @@ describe('referenceInspector', function () {
 				]
 			}
 		};
-		referenceInterceptor.response(siblings);
+		referenceInterceptor.response({data:siblings});
 		expect(siblings.anotherChild.children[0].$id).toBe(2);
 
 		var simpleCircular = {
@@ -39,7 +39,7 @@ describe('referenceInspector', function () {
 			}
 		};
 
-		referenceInterceptor.response(simpleCircular);
+		referenceInterceptor.response({data:simpleCircular});
 		expect(simpleCircular.anotherChild.child.$ref).toBe(1);
 
 		var siblingCircular = {
@@ -57,7 +57,7 @@ describe('referenceInspector', function () {
 			}
 		};
 
-		referenceInterceptor.response(siblingCircular);
+		referenceInterceptor.response({data:siblingCircular});
 		expect(siblingCircular.anotherChild.children[0].$id).toBe(2);
 		expect(siblingCircular.anotherChild.children[1].$ref).toBe(1);
 	});

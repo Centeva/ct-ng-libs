@@ -155,7 +155,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('lint', 'Runs code quality inspections', ['jshint:src']);
 	grunt.registerTask('lintTeamcity', 'Runs code quality inspections and generates reports for teamcity', ['jshint:teamcity']);
 	grunt.registerTask('tests', 'Runs jasmine tests', ['concat:distBowerScripts', 'jasmine:tests']);
-	grunt.registerTask('debugTests', 'Debugs jasmine tests.', ['build', 'connect:tests', 'watch:tests']);
+	grunt.registerTask('debugTests', 'Debugs jasmine tests.', ['concat:distBowerScripts', 'connect:tests', 'watch:tests']);
 	grunt.registerTask('dist', [
 		'clean:dist',
 		'ngAnnotate:dist',
